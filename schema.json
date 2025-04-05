@@ -5037,10 +5037,6 @@
             {
               "type": "string",
               "value": "verified"
-            },
-            {
-              "type": "string",
-              "value": "failed"
             }
           ]
         },

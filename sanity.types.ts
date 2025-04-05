@@ -832,7 +832,7 @@ export type Student = {
     _type: 'image'
   }
   clientId?: string
-  emailVerified?: 'pending' | 'verified' | 'failed'
+  emailVerified?: 'pending' | 'verified'
   alreadyOnboarded?: boolean
   learningPreferences?: {
     goal?: string
@@ -1006,51 +1006,3 @@ export type AllSanitySchemaTypes =
   | SanityImageMetadata
   | Notification
 export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: lib/student/index.ts
-// Variable: getStudentQuery
-// Query: *[_type == "student" && clientId == $clientId][0]
-export type GetStudentQueryResult = {
-  _id: string
-  _type: 'student'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  email?: string
-  image?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  clientId?: string
-  emailVerified?: 'failed' | 'pending' | 'verified'
-  alreadyOnboarded?: boolean
-  learningPreferences?: {
-    goal?: string
-    focus?: string
-    topic?: string
-    level?: 'advanced' | 'beginner' | 'intermediate'
-    studyTime?: string
-    studyTimeOfDay?: string
-  }
-  settings?: {
-    notifications?: {
-      email?: 'all' | 'important' | 'none'
-    }
-  }
-} | null
-
-// Query TypeMap
-import '@sanity/client'
-declare module '@sanity/client' {
-  interface SanityQueries {
-    '*[_type == "student" && clientId == $clientId][0]': GetStudentQueryResult
-  }
-}

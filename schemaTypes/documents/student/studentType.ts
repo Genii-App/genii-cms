@@ -68,7 +68,6 @@ export const studentType = defineType({
         list: [
           {title: 'Pending', value: 'pending'},
           {title: 'Verified', value: 'verified'},
-          {title: 'Failed', value: 'failed'},
         ],
         layout: 'radio',
       },
