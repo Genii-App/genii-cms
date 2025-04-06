@@ -257,12 +257,7 @@ export const courseType = defineType({
         layout: 'grid',
       },
       of: [{type: 'reference', to: [{type: 'chapter'}]}],
-      validation: (rule) =>
-        rule
-          .required()
-          .error('At least one chapter is required')
-          .unique()
-          .error('Each chapter can only be added once'),
+      validation: (rule) => rule.unique().error('Each chapter can only be added once'),
     }),
   ],
 })

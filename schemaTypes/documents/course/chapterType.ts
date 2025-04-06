@@ -138,13 +138,7 @@ export const chapterType = defineType({
         layout: 'grid',
       },
       of: [{type: 'reference', to: [{type: 'lesson'}]}],
-      validation: (rule) =>
-        rule
-          .required()
-          .min(1)
-          .error('At least one lesson is required')
-          .unique()
-          .error('Each lesson can only be added once'),
+      validation: (rule) => rule.unique().error('Each lesson can only be added once'),
       description: 'Add and arrange the lessons for this chapter',
     }),
     defineField({
@@ -153,7 +147,6 @@ export const chapterType = defineType({
       type: 'reference',
       group: 'content',
       to: [{type: 'quiz'}],
-      validation: (rule) => rule.required().error('A quiz is required to complete the chapter'),
       description: 'Select or create the quiz for this chapter',
     }),
   ],
