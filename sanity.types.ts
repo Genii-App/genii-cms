@@ -169,6 +169,30 @@ export type BlockContent = Array<
     }
 >
 
+export type CourseReview = {
+  _id: string
+  _type: 'courseReview'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  reviewTitle?: string
+  course?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'course'
+  }
+  rating?: 1 | 2 | 3 | 4 | 5
+  reviewContent?: string
+  reviewer?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'student'
+  }
+  reviewDate?: string
+}
+
 export type QuizAttemptDetail = {
   _id: string
   _type: 'quizAttemptDetail'
@@ -977,6 +1001,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | BlockContent
+  | CourseReview
   | QuizAttemptDetail
   | AnswerOption
   | Question
