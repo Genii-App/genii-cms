@@ -140,6 +140,21 @@ export const structure: StructureResolver = async (S, context) => {
                     ]),
                 ),
 
+              // Course Reviews
+              S.listItem()
+                .title('Course Reviews')
+                .icon(StarIcon)
+                .child(
+                  S.documentTypeList('courseReview')
+                    .title('All Course Reviews')
+                    .menuItems([
+                      S.menuItem()
+                        .title('Create New Review')
+                        .icon(StarIcon)
+                        .intent({type: 'create', params: {type: 'courseReview'}}),
+                    ]),
+                ),
+
               // Course Content
               S.listItem()
                 .title('Course Content')

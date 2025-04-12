@@ -36,7 +36,7 @@ import {questionType} from './documents/course/questionType'
 import {answerOptionType} from './documents/course/answerOptionType'
 import {quizAttemptType} from './documents/course/quizAttemptType'
 import {quizAttemptDetailType} from './documents/course/quizAttemptDetailType'
-
+import {courseReviewType} from './documents/course/courseReviewType'
 // Reusable object schemas
 import {blockContent} from './objects/blockContentType'
 
@@ -69,6 +69,7 @@ const courseSchemas = [
   answerOptionType,
   quizAttemptType,
   quizAttemptDetailType,
+  courseReviewType,
 ]
 
 const objectSchemas = [blockContent]
