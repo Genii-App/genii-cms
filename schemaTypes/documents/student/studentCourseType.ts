@@ -105,6 +105,22 @@ export const studentCourseType = defineType({
       description: 'Overall course completion percentage',
     }),
     defineField({
+      name: 'nextChapter',
+      title: 'Next Chapter',
+      type: 'reference',
+      to: [{type: 'chapter'}],
+      group: 'progress',
+      description: 'The next chapter the student needs to complete',
+    }),
+    defineField({
+      name: 'nextLesson',
+      title: 'Next Lesson',
+      type: 'reference',
+      to: [{type: 'lesson'}],
+      group: 'progress',
+      description: 'The next lesson the student needs to complete',
+    }),
+    defineField({
       name: 'completedChapters',
       title: 'Completed Chapters',
       type: 'array',

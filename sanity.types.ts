@@ -455,6 +455,18 @@ export type StudentCourse = {
   }
   status?: 'not_started' | 'in_progress' | 'completed' | 'on_hold' | 'dropped'
   progress?: number
+  nextChapter?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'chapter'
+  }
+  nextLesson?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'lesson'
+  }
   completedChapters?: Array<{
     _ref: string
     _type: 'reference'
