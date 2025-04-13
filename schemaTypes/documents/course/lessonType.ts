@@ -130,7 +130,6 @@ export const lessonType = defineType({
       type: 'reference',
       group: 'content',
       to: [{type: 'lessonContent'}],
-      validation: (rule) => rule.required().error('Lesson content is required'),
       description: 'Select or create the content for this lesson',
       options: {
         disableNew: false,

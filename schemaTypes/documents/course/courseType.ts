@@ -154,6 +154,17 @@ export const courseType = defineType({
       validation: (rule) => rule.required().error('Course access level must be specified'),
     }),
     defineField({
+      name: 'orderNumber',
+      title: 'Display Order',
+      type: 'number',
+      group: 'basic',
+      description: 'Set the order in which this course should appear (lower numbers appear first)',
+      validation: (rule) => 
+        rule.integer()
+            .positive()
+            .error('Order number must be a positive integer'),
+    }),
+    defineField({
       name: 'thumbnail',
       title: 'Course Thumbnail',
       type: 'image',
