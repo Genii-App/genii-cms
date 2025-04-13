@@ -1,0 +1,5032 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "A clear, concise title for the notification",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 10
+              },
+              {
+                "flag": "max",
+                "constraint": 500
+              }
+            ],
+            "level": "error",
+            "message": "Message cannot be longer than 500 characters"
+          }
+        ],
+        "description": "The main notification message",
+        "name": "message",
+        "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Info",
+              "value": "info"
+            },
+            {
+              "title": "Success",
+              "value": "success"
+            },
+            {
+              "title": "Warning",
+              "value": "warning"
+            },
+            {
+              "title": "Error",
+              "value": "error"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "info",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "info",
+                  "success",
+                  "warning",
+                  "error"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select a notification type"
+          }
+        ],
+        "name": "type",
+        "type": "string",
+        "title": "Notification Type"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Draft",
+              "value": "draft"
+            },
+            {
+              "title": "Scheduled",
+              "value": "scheduled"
+            },
+            {
+              "title": "Active",
+              "value": "active"
+            },
+            {
+              "title": "Completed",
+              "value": "completed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "draft",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "draft",
+                  "scheduled",
+                  "active",
+                  "completed"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select a status"
+          }
+        ],
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Optional: Add a link for users to click on the notification",
+        "name": "link",
+        "type": "url",
+        "title": "Action Link"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select a target audience"
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "type": "student"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to student"
+          }
+        ],
+        "name": "targetAudience",
+        "type": "array"
+      },
+      {
+        "description": "Optional: Target specific users (leave empty to use Target Audience)",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "student"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to student"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "specificUsers",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "When should this notification be sent?",
+        "name": "scheduledFor",
+        "type": "datetime",
+        "title": "Schedule For"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "When should this notification stop being shown?",
+        "name": "expiresAt",
+        "type": "datetime"
+      }
+    ],
+    "name": "notification",
+    "type": "document",
+    "title": "Platform Notification"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "A clear, concise title for internal reference",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 10
+              },
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error",
+            "message": "Message cannot be longer than 200 characters"
+          }
+        ],
+        "description": "The main banner message (keep it short and impactful)",
+        "name": "message",
+        "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Info",
+              "value": "info"
+            },
+            {
+              "title": "Success",
+              "value": "success"
+            },
+            {
+              "title": "Warning",
+              "value": "warning"
+            },
+            {
+              "title": "Error",
+              "value": "error"
+            },
+            {
+              "title": "Promotional",
+              "value": "promo"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "info",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "info",
+                  "success",
+                  "warning",
+                  "error",
+                  "promo"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select a banner type"
+          }
+        ],
+        "name": "type",
+        "type": "string",
+        "title": "Banner Type"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Draft",
+              "value": "draft"
+            },
+            {
+              "title": "Scheduled",
+              "value": "scheduled"
+            },
+            {
+              "title": "Active",
+              "value": "active"
+            },
+            {
+              "title": "Completed",
+              "value": "completed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "draft",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "draft",
+                  "scheduled",
+                  "active",
+                  "completed"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select a status"
+          }
+        ],
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true,
+          "metadata": [
+            "blurhash",
+            "lqip",
+            "palette"
+          ]
+        },
+        "description": "Optional: Add an image to make the banner more engaging (recommended: 1200x300px)",
+        "name": "image",
+        "type": "image",
+        "title": "Banner Image"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Default",
+              "value": "default"
+            },
+            {
+              "title": "Light",
+              "value": "light"
+            },
+            {
+              "title": "Dark",
+              "value": "dark"
+            },
+            {
+              "title": "Brand Primary",
+              "value": "primary"
+            },
+            {
+              "title": "Brand Secondary",
+              "value": "secondary"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "default",
+        "description": "Choose a background color theme for the banner",
+        "name": "backgroundColor",
+        "type": "string"
+      },
+      {
+        "description": "Optional: Add a call-to-action button",
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/",
+                          "/^mailto$/",
+                          "/^tel$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "url",
+            "type": "url",
+            "title": "URL"
+          },
+          {
+            "initialValue": "Learn More",
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "max",
+                    "constraint": 20
+                  }
+                ],
+                "level": "error",
+                "message": "Button text should be concise (max 20 characters)"
+              }
+            ],
+            "name": "text",
+            "type": "string",
+            "title": "Button Text"
+          }
+        ],
+        "name": "link",
+        "type": "object",
+        "title": "Action Link"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Top of Page",
+              "value": "top"
+            },
+            {
+              "title": "Bottom of Page",
+              "value": "bottom"
+            },
+            {
+              "title": "Floating",
+              "value": "float"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "top",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "top",
+                  "bottom",
+                  "float"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select banner placement"
+          }
+        ],
+        "name": "placement",
+        "type": "string",
+        "title": "Banner Placement"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "All Users",
+              "value": "all"
+            },
+            {
+              "title": "Free Users",
+              "value": "free"
+            },
+            {
+              "title": "Premium Users",
+              "value": "premium"
+            },
+            {
+              "title": "New Users",
+              "value": "new"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "all",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "all",
+                  "free",
+                  "premium",
+                  "new"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select a target audience"
+          }
+        ],
+        "name": "targetAudience",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "All Pages",
+              "value": "*"
+            },
+            {
+              "title": "Home Page",
+              "value": "/"
+            },
+            {
+              "title": "Course Pages",
+              "value": "/courses/*"
+            },
+            {
+              "title": "Profile Pages",
+              "value": "/profile/*"
+            }
+          ]
+        },
+        "initialValue": [
+          "*"
+        ],
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "*",
+                  "/",
+                  "/courses/*",
+                  "/profile/*"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select at least one page"
+          }
+        ],
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "targetPages",
+        "type": "array",
+        "title": "Show On Pages"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "startDate",
+        "type": "datetime"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "endDate",
+        "type": "datetime"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Yes - Users can dismiss",
+              "value": "yes"
+            },
+            {
+              "title": "No - Always show",
+              "value": "no"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "yes",
+        "description": "Allow users to dismiss/close the banner",
+        "name": "dismissible",
+        "type": "string",
+        "title": "Allow Dismissal"
+      }
+    ],
+    "name": "banner",
+    "type": "document",
+    "title": "Platform Banner"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "warning",
+            "message": "A name helps identify the student"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "A valid email is required"
+          }
+        ],
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true,
+          "accept": "image/*"
+        },
+        "description": "Profile picture of the student",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Unique identifier for the student",
+        "name": "clientId",
+        "type": "string"
+      },
+      {
+        "initialValue": "pending",
+        "options": {
+          "list": [
+            {
+              "title": "Pending",
+              "value": "pending"
+            },
+            {
+              "title": "Verified",
+              "value": "verified"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "emailVerified",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "description": "Whether the student has already onboarded",
+        "name": "alreadyOnboarded",
+        "type": "boolean"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Learning goal is required"
+              }
+            ],
+            "description": "What does the student want to achieve?",
+            "name": "goal",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Learning focus is required"
+              }
+            ],
+            "description": "What specific area does the student want to focus on?",
+            "name": "focus",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Learning topic is required"
+              }
+            ],
+            "description": "What topic does the student want to learn?",
+            "name": "topic",
+            "type": "string"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Beginner",
+                  "value": "beginner"
+                },
+                {
+                  "title": "Intermediate",
+                  "value": "intermediate"
+                },
+                {
+                  "title": "Advanced",
+                  "value": "advanced"
+                }
+              ],
+              "layout": "radio"
+            },
+            "description": "Current knowledge level of the student",
+            "name": "level",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Study time preference is required"
+              }
+            ],
+            "description": "How much time can the student dedicate to learning?",
+            "name": "studyTime",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Preferred study time is required"
+              }
+            ],
+            "description": "When does the student prefer to study?",
+            "name": "studyTimeOfDay",
+            "type": "string"
+          }
+        ],
+        "name": "learningPreferences",
+        "type": "object"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "All",
+                      "value": "all"
+                    },
+                    {
+                      "title": "Important Only",
+                      "value": "important"
+                    },
+                    {
+                      "title": "None",
+                      "value": "none"
+                    }
+                  ],
+                  "layout": "radio"
+                },
+                "initialValue": "important",
+                "name": "email",
+                "type": "string",
+                "title": "Email Notifications"
+              }
+            ],
+            "name": "notifications",
+            "type": "object",
+            "title": "Notification Preferences"
+          }
+        ],
+        "name": "settings",
+        "type": "object"
+      }
+    ],
+    "name": "student",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "A clear, descriptive title for the note",
+        "name": "title",
+        "type": "string",
+        "title": "Note Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Note content is required"
+          }
+        ],
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading"
+              },
+              {
+                "value": "h2",
+                "title": "Subheading"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "content",
+        "type": "array",
+        "title": "Note Content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Student reference is required"
+          }
+        ],
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      },
+      {
+        "description": "Optional: Link this note to a specific course",
+        "to": [
+          {
+            "type": "course"
+          }
+        ],
+        "name": "course",
+        "type": "reference",
+        "title": "Related Course"
+      },
+      {
+        "description": "Optional: Link this note to a specific chapter",
+        "to": [
+          {
+            "type": "chapter"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "chapter",
+        "type": "reference",
+        "title": "Related Chapter"
+      },
+      {
+        "description": "Optional: Link this note to a specific lesson",
+        "to": [
+          {
+            "type": "lesson"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "lesson",
+        "type": "reference",
+        "title": "Related Lesson"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "description": "Add tags to help organize and find notes",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "tags",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Private",
+              "value": "private"
+            },
+            {
+              "title": "Public",
+              "value": "public"
+            },
+            {
+              "title": "Share with Instructor",
+              "value": "instructor"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "private",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "private",
+                  "public",
+                  "instructor"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select note visibility"
+          }
+        ],
+        "name": "visibility",
+        "type": "string",
+        "title": "Note Visibility"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Draft",
+              "value": "draft"
+            },
+            {
+              "title": "Published",
+              "value": "published"
+            },
+            {
+              "title": "Archived",
+              "value": "archived"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "draft",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "draft",
+                  "published",
+                  "archived"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please select note status"
+          }
+        ],
+        "name": "status",
+        "type": "string",
+        "title": "Note Status"
+      }
+    ],
+    "name": "studentNote",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "badge"
+          }
+        ],
+        "name": "badge",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      },
+      {
+        "name": "earnedAt",
+        "type": "datetime"
+      }
+    ],
+    "name": "studentBadge",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "startedAt",
+        "type": "datetime"
+      },
+      {
+        "name": "endedAt",
+        "type": "datetime"
+      },
+      {
+        "options": {
+          "list": [
+            "active",
+            "inactive"
+          ]
+        },
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "streak",
+        "type": "number"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      }
+    ],
+    "name": "studentStreak",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "course"
+          }
+        ],
+        "name": "course",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      },
+      {
+        "name": "issuedAt",
+        "type": "datetime"
+      },
+      {
+        "options": {
+          "list": [
+            "issued",
+            "revoked"
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "issued",
+                  "revoked"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "status",
+        "type": "string"
+      }
+    ],
+    "name": "studentCertificate",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Student reference is required"
+          }
+        ],
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course reference is required"
+          }
+        ],
+        "to": [
+          {
+            "type": "course"
+          }
+        ],
+        "name": "course",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Not Started",
+              "value": "not_started"
+            },
+            {
+              "title": "In Progress",
+              "value": "in_progress"
+            },
+            {
+              "title": "Completed",
+              "value": "completed"
+            },
+            {
+              "title": "On Hold",
+              "value": "on_hold"
+            },
+            {
+              "title": "Dropped",
+              "value": "dropped"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "not_started",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "not_started",
+                  "in_progress",
+                  "completed",
+                  "on_hold",
+                  "dropped"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course status is required"
+          }
+        ],
+        "name": "status",
+        "type": "string",
+        "title": "Course Status"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Progress cannot exceed 100%"
+          }
+        ],
+        "description": "Overall course completion percentage",
+        "name": "progress",
+        "type": "number",
+        "title": "Progress Percentage"
+      },
+      {
+        "description": "The next chapter the student needs to complete",
+        "to": [
+          {
+            "type": "chapter"
+          }
+        ],
+        "name": "nextChapter",
+        "type": "reference"
+      },
+      {
+        "description": "The next lesson the student needs to complete",
+        "to": [
+          {
+            "type": "lesson"
+          }
+        ],
+        "name": "nextLesson",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "type": "chapter"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to chapter"
+          }
+        ],
+        "name": "completedChapters",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "lesson"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to lesson"
+          }
+        ],
+        "name": "completedLessons",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "quizAttempt"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to quiz attempt"
+          }
+        ],
+        "name": "quizAttempts",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "lastAccessedAt",
+        "type": "datetime",
+        "title": "Last Accessed"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Enrollment date is required"
+          }
+        ],
+        "name": "enrolledAt",
+        "type": "datetime",
+        "title": "Enrollment Date"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "completedAt",
+        "type": "datetime",
+        "title": "Completion Date"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Not Eligible",
+              "value": "not_eligible"
+            },
+            {
+              "title": "Eligible - Not Issued",
+              "value": "eligible"
+            },
+            {
+              "title": "Issued",
+              "value": "issued"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "not_eligible",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "not_eligible",
+                  "eligible",
+                  "issued"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Certificate status is required"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "certificateIssued",
+        "type": "string",
+        "title": "Certificate Status"
+      },
+      {
+        "to": [
+          {
+            "type": "studentCertificate"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "certificate",
+        "type": "reference",
+        "title": "Course Certificate"
+      },
+      {
+        "description": "Notes related to student's course progress",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "studentNote"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to student note"
+          }
+        ],
+        "name": "notes",
+        "type": "array",
+        "title": "Progress Notes"
+      }
+    ],
+    "name": "studentCourse",
+    "type": "document",
+    "title": "Student Course Progress"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Student reference is required"
+          }
+        ],
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Started Course",
+              "value": "course_started"
+            },
+            {
+              "title": "Completed Course",
+              "value": "course_completed"
+            },
+            {
+              "title": "Completed Lesson",
+              "value": "lesson_completed"
+            },
+            {
+              "title": "Attempted Quiz",
+              "value": "quiz_attempted"
+            },
+            {
+              "title": "Passed Quiz",
+              "value": "quiz_passed"
+            },
+            {
+              "title": "Earned Achievement",
+              "value": "achievement_earned"
+            },
+            {
+              "title": "Created Note",
+              "value": "note_created"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "course_started",
+                  "course_completed",
+                  "lesson_completed",
+                  "quiz_attempted",
+                  "quiz_passed",
+                  "achievement_earned",
+                  "note_created"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Activity type is required"
+          }
+        ],
+        "name": "activityType",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "course"
+          }
+        ],
+        "name": "course",
+        "type": "reference",
+        "title": "Related Course"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "lesson"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "lesson",
+        "type": "reference",
+        "title": "Related Lesson"
+      },
+      {
+        "to": [
+          {
+            "type": "quiz"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "quiz",
+        "type": "reference",
+        "title": "Related Quiz"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "quizAttempt"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "quizAttempt",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "badge"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "achievement",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "studentNote"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "note",
+        "type": "reference"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "min",
+                    "constraint": 0
+                  }
+                ],
+                "level": "error",
+                "message": "Duration cannot be negative"
+              }
+            ],
+            "name": "duration",
+            "type": "number",
+            "title": "Duration (minutes)"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "min",
+                    "constraint": 0
+                  },
+                  {
+                    "flag": "max",
+                    "constraint": 100
+                  }
+                ],
+                "level": "error",
+                "message": "Score cannot exceed 100"
+              }
+            ],
+            "name": "score",
+            "type": "number"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Web",
+                  "value": "web"
+                },
+                {
+                  "title": "Mobile App",
+                  "value": "mobile"
+                },
+                {
+                  "title": "Tablet",
+                  "value": "tablet"
+                }
+              ]
+            },
+            "name": "platform",
+            "type": "string"
+          }
+        ],
+        "name": "metadata",
+        "type": "object",
+        "title": "Additional Metadata"
+      }
+    ],
+    "name": "studentActivity",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "to": [
+          {
+            "type": "notification"
+          }
+        ],
+        "name": "notification",
+        "type": "reference"
+      },
+      {
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      },
+      {
+        "name": "readAt",
+        "type": "datetime"
+      },
+      {
+        "initialValue": false,
+        "name": "isRead",
+        "type": "boolean"
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime"
+      }
+    ],
+    "name": "studentNotification",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "chapter"
+          }
+        ],
+        "name": "chapter",
+        "type": "reference"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "points",
+        "type": "number"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Common",
+              "value": "common"
+            },
+            {
+              "title": "Uncommon",
+              "value": "uncommon"
+            },
+            {
+              "title": "Rare",
+              "value": "rare"
+            },
+            {
+              "title": "Epic",
+              "value": "epic"
+            },
+            {
+              "title": "Legendary",
+              "value": "legendary"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "common",
+                  "uncommon",
+                  "rare",
+                  "epic",
+                  "legendary"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "rarity",
+        "type": "string"
+      },
+      {
+        "initialValue": true,
+        "name": "isActive",
+        "type": "boolean"
+      }
+    ],
+    "name": "badge",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Price in Rupiah Indonesia",
+        "name": "price",
+        "type": "number"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Duration in days",
+        "name": "duration",
+        "type": "number"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "features",
+        "type": "array"
+      },
+      {
+        "initialValue": false,
+        "name": "isPopular",
+        "type": "boolean"
+      },
+      {
+        "initialValue": true,
+        "name": "isActive",
+        "type": "boolean"
+      },
+      {
+        "name": "availableFrom",
+        "type": "datetime"
+      },
+      {
+        "name": "availableUntil",
+        "type": "datetime"
+      }
+    ],
+    "name": "subscriptionPackage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 5
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Course title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "Name of the course - be descriptive and engaging",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "A slug is required for routing"
+          }
+        ],
+        "description": "This will be used for the course URL",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 50
+              },
+              {
+                "flag": "max",
+                "constraint": 1000
+              }
+            ],
+            "level": "error",
+            "message": "Course description cannot be longer than 1000 characters"
+          }
+        ],
+        "description": "A compelling description of what students will learn - focus on outcomes and benefits",
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course category is required for organization"
+          }
+        ],
+        "description": "Select the primary category for this course",
+        "to": [
+          {
+            "type": "courseCategory"
+          }
+        ],
+        "name": "category",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Beginner",
+              "value": "beginner"
+            },
+            {
+              "title": "Intermediate",
+              "value": "intermediate"
+            },
+            {
+              "title": "Advanced",
+              "value": "advanced"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "beginner",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "beginner",
+                  "intermediate",
+                  "advanced"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course difficulty level is required"
+          }
+        ],
+        "name": "difficulty",
+        "type": "string",
+        "fieldset": "metadata"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Bahasa Indonesia",
+              "value": "indonesia"
+            },
+            {
+              "title": "English",
+              "value": "english"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "indonesia",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "indonesia",
+                  "english"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course language is required"
+          }
+        ],
+        "name": "language",
+        "type": "string",
+        "fieldset": "metadata"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Free",
+              "value": "free"
+            },
+            {
+              "title": "Premium",
+              "value": "premium"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "free",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "free",
+                  "premium"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course access level must be specified"
+          }
+        ],
+        "name": "isPremium",
+        "type": "string",
+        "title": "Access Level"
+      },
+      {
+        "options": {
+          "hotspot": true,
+          "metadata": [
+            "blurhash",
+            "lqip",
+            "palette"
+          ],
+          "storeOriginalFilename": false
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course thumbnail is required for better visibility"
+          }
+        ],
+        "description": "Upload a high-quality image (16:9 ratio recommended, minimum 1280x720px)",
+        "name": "thumbnail",
+        "type": "image",
+        "title": "Course Thumbnail"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              },
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Loom video URL for the course trailer (must be a share URL)",
+        "name": "trailer",
+        "type": "url",
+        "title": "Course Trailer"
+      },
+      {
+        "options": {
+          "sortable": true,
+          "modal": {
+            "type": "dialog"
+          }
+        },
+        "initialValue": [
+          {
+            "title": "Requirements",
+            "description": "Requirements to join the course"
+          },
+          {
+            "title": "What you'll learn",
+            "description": "What you'll learn in the course"
+          },
+          {
+            "title": "What you'll get",
+            "description": "What you'll get in the course"
+          }
+        ],
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              }
+            ],
+            "level": "error",
+            "message": "At least three sections are required (Requirements, Learning Outcomes, and Benefits)"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error",
+                    "message": "Section title is required"
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      },
+                      {
+                        "flag": "min",
+                        "constraint": 10
+                      }
+                    ],
+                    "level": "warning",
+                    "message": "Descriptions work better when they are detailed"
+                  }
+                ],
+                "name": "description",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "additionalDetails",
+        "type": "array"
+      },
+      {
+        "options": {
+          "sortable": true,
+          "layout": "grid"
+        },
+        "of": [
+          {
+            "to": [
+              {
+                "type": "chapter"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to chapter"
+          }
+        ],
+        "name": "chapters",
+        "type": "array",
+        "title": "Course Chapters"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "metadata",
+        "title": "Course Metadata",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "course",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Category name is required"
+          }
+        ],
+        "description": "Name of the category",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "A slug is required for routing"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 20
+              },
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error",
+            "message": "Category description cannot be longer than 200 characters"
+          }
+        ],
+        "description": "A brief description of this category",
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Category icon is required for better visibility"
+          }
+        ],
+        "description": "An icon that represents this category (1:1 ratio recommended)",
+        "name": "icon",
+        "type": "image"
+      }
+    ],
+    "name": "courseCategory",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Chapter title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "Name of the chapter - be clear and descriptive",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "A slug is required for routing"
+          }
+        ],
+        "description": "This will be used for the chapter URL",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 30
+              },
+              {
+                "flag": "max",
+                "constraint": 500
+              }
+            ],
+            "level": "error",
+            "message": "Chapter description cannot be longer than 500 characters"
+          }
+        ],
+        "description": "A clear description of what students will learn in this chapter - focus on specific outcomes",
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Chapter must be associated with a course"
+          }
+        ],
+        "description": "Select the course this chapter belongs to",
+        "to": [
+          {
+            "type": "course"
+          }
+        ],
+        "name": "course",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Chapter order must be at least 1"
+          }
+        ],
+        "description": "The order of this chapter in the course (1, 2, 3, etc.)",
+        "name": "orderNumber",
+        "type": "number",
+        "title": "Chapter Order",
+        "fieldset": "metadata"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Time must be at least 1 minute"
+          }
+        ],
+        "description": "Approximate time to complete this chapter in minutes",
+        "name": "estimatedTime",
+        "type": "number",
+        "title": "Estimated Time (minutes)",
+        "fieldset": "metadata"
+      },
+      {
+        "options": {
+          "sortable": true,
+          "layout": "grid"
+        },
+        "description": "Add and arrange the lessons for this chapter",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "lesson"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to lesson"
+          }
+        ],
+        "name": "lessons",
+        "type": "array",
+        "title": "Chapter Lessons"
+      },
+      {
+        "description": "Select or create the quiz for this chapter",
+        "to": [
+          {
+            "type": "quiz"
+          }
+        ],
+        "name": "quiz",
+        "type": "reference",
+        "title": "Chapter Quiz"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "metadata",
+        "title": "Chapter Metadata",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "chapter",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Lesson title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "Name of the lesson - be specific about what will be learned",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "A slug is required for routing"
+          }
+        ],
+        "description": "This will be used for the lesson URL",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Text",
+              "value": "text"
+            },
+            {
+              "title": "Video",
+              "value": "video"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "text",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "text",
+                  "video"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Lesson type is required"
+          }
+        ],
+        "description": "Select the type of content for this lesson",
+        "name": "type",
+        "type": "string",
+        "fieldset": "metadata"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Time must be at least 1 minute"
+          }
+        ],
+        "description": "Approximate time to complete this lesson in minutes",
+        "name": "estimatedTime",
+        "type": "number",
+        "title": "Estimated Time (minutes)",
+        "fieldset": "metadata"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Lesson order must be at least 1"
+          }
+        ],
+        "description": "The order of this lesson in the chapter (1, 2, 3, etc.)",
+        "name": "orderNumber",
+        "type": "number",
+        "title": "Lesson Order"
+      },
+      {
+        "options": {
+          "disableNew": false
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Lesson content is required"
+          }
+        ],
+        "description": "Select or create the content for this lesson",
+        "to": [
+          {
+            "type": "lessonContent"
+          }
+        ],
+        "name": "content",
+        "type": "reference",
+        "title": "Lesson Content"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "metadata",
+        "title": "Lesson Metadata",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "lesson",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Text",
+              "value": "text"
+            },
+            {
+              "title": "Video",
+              "value": "video"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "text",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "text",
+                  "video"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Content type is required"
+          }
+        ],
+        "description": "Select the type of content for this version",
+        "name": "type",
+        "type": "string",
+        "fieldset": "contentType"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Yes - Default Content",
+              "value": "yes"
+            },
+            {
+              "title": "No - Alternative Version",
+              "value": "no"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "yes",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "yes",
+                  "no"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please specify if this is the default content"
+          }
+        ],
+        "description": "Specify if this is the primary content version that most students will see",
+        "name": "isDefault",
+        "type": "string",
+        "title": "Default Version",
+        "fieldset": "contentType"
+      },
+      {
+        "initialValue": 1,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Version must be at least 1"
+          }
+        ],
+        "description": "Increment this number for each new version of the content",
+        "name": "version",
+        "type": "number",
+        "title": "Version Number"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error",
+            "message": "Content is required"
+          }
+        ],
+        "description": "Write or paste the lesson content here - use formatting tools for better readability",
+        "name": "content",
+        "type": "blockContent"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Content must be associated with a lesson"
+          }
+        ],
+        "description": "Select the lesson this content belongs to",
+        "to": [
+          {
+            "type": "lesson"
+          }
+        ],
+        "name": "lesson",
+        "type": "reference",
+        "title": "Associated Lesson"
+      },
+      {
+        "description": "Select the student who created this content version (if applicable)",
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "createdBy",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "dateFormat": "YYYY-MM-DD",
+          "timeFormat": "HH:mm",
+          "timeStep": 15
+        },
+        "readOnly": true,
+        "name": "lastUpdated",
+        "type": "datetime"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "contentType",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "lessonContent",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Quiz title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "Name of the quiz - be descriptive about what is being tested",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 20
+              },
+              {
+                "flag": "max",
+                "constraint": 500
+              }
+            ],
+            "level": "error",
+            "message": "Quiz description cannot be longer than 500 characters"
+          }
+        ],
+        "description": "A brief description of what this quiz covers and what students should expect",
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Quiz must be associated with a chapter"
+          }
+        ],
+        "description": "Select the chapter this quiz belongs to",
+        "to": [
+          {
+            "type": "chapter"
+          }
+        ],
+        "name": "chapter",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "sortable": true,
+          "layout": "grid"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Each question can only be added once"
+          }
+        ],
+        "description": "Add and arrange the questions for this quiz",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "question"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to question"
+          }
+        ],
+        "name": "questions",
+        "type": "array"
+      },
+      {
+        "initialValue": 70,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Passing score cannot exceed 100%"
+          }
+        ],
+        "description": "Minimum percentage required to pass the quiz",
+        "name": "passingScore",
+        "type": "number",
+        "title": "Passing Score (%)"
+      },
+      {
+        "initialValue": 15,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Time limit must be at least 1 minute"
+          }
+        ],
+        "description": "Maximum time allowed to complete the quiz",
+        "name": "timeLimit",
+        "type": "number",
+        "title": "Time Limit (minutes)",
+        "fieldset": "timing"
+      },
+      {
+        "initialValue": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Maximum attempts must be at least 1"
+          }
+        ],
+        "description": "How many times a student can attempt this quiz",
+        "name": "maxAttempts",
+        "type": "number",
+        "title": "Maximum Attempts",
+        "fieldset": "timing"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "After Each Attempt",
+              "value": "afterEachAttempt"
+            },
+            {
+              "title": "After Final Attempt",
+              "value": "afterFinalAttempt"
+            },
+            {
+              "title": "Never",
+              "value": "never"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "afterEachAttempt",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "afterEachAttempt",
+                  "afterFinalAttempt",
+                  "never"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please specify when to show results"
+          }
+        ],
+        "description": "When should students see their quiz results",
+        "name": "showResults",
+        "type": "string",
+        "fieldset": "behavior"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Immediate Feedback",
+              "value": "immediateFeedback"
+            },
+            {
+              "title": "Final Feedback",
+              "value": "finalFeedback"
+            },
+            {
+              "title": "No Feedback",
+              "value": "noFeedback"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "immediateFeedback",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "immediateFeedback",
+                  "finalFeedback",
+                  "noFeedback"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please specify the feedback type"
+          }
+        ],
+        "description": "When should students receive feedback on their answers",
+        "name": "feedbackType",
+        "type": "string",
+        "fieldset": "behavior"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Random Order",
+              "value": "random"
+            },
+            {
+              "title": "Fixed Order",
+              "value": "fixed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "random",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "random",
+                  "fixed"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please specify the question order"
+          }
+        ],
+        "description": "Should questions be presented in random order or fixed order",
+        "name": "randomizeQuestions",
+        "type": "string",
+        "title": "Question Order"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "timing",
+        "title": "Timing Settings",
+        "options": {
+          "columns": 2
+        }
+      },
+      {
+        "name": "behavior",
+        "title": "Quiz Behavior",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "quiz",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 10
+              },
+              {
+                "flag": "max",
+                "constraint": 500
+              }
+            ],
+            "level": "error",
+            "message": "Question text cannot be longer than 500 characters"
+          }
+        ],
+        "description": "Write your question - be clear and specific",
+        "name": "text",
+        "type": "text",
+        "title": "Question Text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Multiple Choice",
+              "value": "multipleChoice"
+            },
+            {
+              "title": "True/False",
+              "value": "trueFalse"
+            },
+            {
+              "title": "Fill in the Blank",
+              "value": "fillInTheBlank"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "multipleChoice",
+                  "trueFalse",
+                  "fillInTheBlank"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Question type is required"
+          }
+        ],
+        "description": "Select the type of question",
+        "name": "type",
+        "type": "string",
+        "title": "Question Type"
+      },
+      {
+        "options": {
+          "hotspot": true,
+          "metadata": [
+            "blurhash",
+            "lqip",
+            "palette"
+          ],
+          "storeOriginalFilename": false
+        },
+        "description": "Optional: Add an image to support the question (recommended: 800x600px)",
+        "name": "image",
+        "type": "image",
+        "title": "Question Image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Question must be associated with a quiz"
+          }
+        ],
+        "description": "Select the quiz this question belongs to",
+        "to": [
+          {
+            "type": "quiz"
+          }
+        ],
+        "name": "quiz",
+        "type": "reference",
+        "title": "Associated Quiz"
+      },
+      {
+        "initialValue": 1,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Points must be at least 1"
+          }
+        ],
+        "description": "How many points this question is worth",
+        "name": "points",
+        "type": "number"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Easy",
+              "value": "easy"
+            },
+            {
+              "title": "Medium",
+              "value": "medium"
+            },
+            {
+              "title": "Hard",
+              "value": "hard"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "medium",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "easy",
+                  "medium",
+                  "hard"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Difficulty level is required"
+          }
+        ],
+        "description": "Rate the difficulty of this question",
+        "name": "difficulty",
+        "type": "string",
+        "title": "Difficulty Level"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Random Order",
+              "value": "random"
+            },
+            {
+              "title": "Fixed Order",
+              "value": "fixed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "random",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "random",
+                  "fixed"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please specify the answer order"
+          }
+        ],
+        "description": "Should answer options be presented in random order or fixed order",
+        "name": "randomizeAnswers",
+        "type": "string",
+        "title": "Answer Order",
+        "fieldset": "behavior"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 20
+              },
+              {
+                "flag": "max",
+                "constraint": 1000
+              }
+            ],
+            "level": "error",
+            "message": "Explanation cannot be longer than 1000 characters"
+          }
+        ],
+        "description": "Explain the correct answer and why it is correct",
+        "name": "explanation",
+        "type": "text"
+      },
+      {
+        "options": {
+          "sortable": true,
+          "layout": "grid"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error",
+            "message": "Each answer can only be added once"
+          }
+        ],
+        "description": "Add and arrange the answer options for this question",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "answerOption"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to answer option"
+          }
+        ],
+        "name": "answers",
+        "type": "array",
+        "title": "Answer Options"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "behavior",
+        "title": "Question Behavior",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "question",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 500
+              }
+            ],
+            "level": "error",
+            "message": "Answer text cannot be longer than 500 characters"
+          }
+        ],
+        "description": "Write the answer option text",
+        "name": "text",
+        "type": "text",
+        "title": "Answer Text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Yes - This is correct",
+              "value": "true"
+            },
+            {
+              "title": "No - This is incorrect",
+              "value": "false"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "false",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "true",
+                  "false"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Please specify if this is the correct answer"
+          }
+        ],
+        "description": "Indicate whether this is the correct answer",
+        "name": "isCorrect",
+        "type": "string",
+        "title": "Correct Answer"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Explain why this answer is correct or incorrect (required for correct answers)",
+        "name": "explanation",
+        "type": "text",
+        "title": "Answer Explanation"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Answer must be associated with a question"
+          }
+        ],
+        "description": "Select the question this answer belongs to",
+        "to": [
+          {
+            "type": "question"
+          }
+        ],
+        "name": "question",
+        "type": "reference",
+        "title": "Associated Question"
+      },
+      {
+        "options": {
+          "hotspot": true,
+          "metadata": [
+            "blurhash",
+            "lqip",
+            "palette"
+          ],
+          "storeOriginalFilename": false
+        },
+        "description": "Optional: Add an image to support the answer (recommended: 800x600px)",
+        "name": "image",
+        "type": "image",
+        "title": "Answer Image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "Order must be at least 1"
+          }
+        ],
+        "description": "Optional: Set a specific display order for this answer option",
+        "hidden": "conditional",
+        "name": "orderNumber",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "answerOption",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "quiz"
+          }
+        ],
+        "name": "quiz",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "student",
+        "type": "reference"
+      },
+      {
+        "name": "feedback",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "score",
+        "type": "number"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Passed",
+              "value": "passed"
+            },
+            {
+              "title": "Failed",
+              "value": "failed"
+            },
+            {
+              "title": "In Progress",
+              "value": "inProgress"
+            }
+          ]
+        },
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "startedAt",
+        "type": "datetime"
+      },
+      {
+        "name": "submittedAt",
+        "type": "datetime"
+      },
+      {
+        "fields": [
+          {
+            "name": "timeTaken",
+            "type": "number"
+          },
+          {
+            "name": "totalQuestions",
+            "type": "number"
+          },
+          {
+            "name": "correctAnswers",
+            "type": "number"
+          },
+          {
+            "name": "incorrectAnswers",
+            "type": "number"
+          }
+        ],
+        "name": "metadata",
+        "type": "object"
+      }
+    ],
+    "name": "quizAttempt",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "quizAttempt"
+          }
+        ],
+        "name": "quizAttempt",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "question"
+          }
+        ],
+        "name": "question",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "answerOption"
+          }
+        ],
+        "name": "answer",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "isCorrect",
+        "type": "boolean"
+      }
+    ],
+    "name": "quizAttemptDetail",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 5
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error",
+            "message": "Review title cannot be longer than 100 characters"
+          }
+        ],
+        "description": "A concise title for the review",
+        "name": "reviewTitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Course reference is required"
+          }
+        ],
+        "description": "The course being reviewed",
+        "to": [
+          {
+            "type": "course"
+          }
+        ],
+        "name": "course",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "1 Star",
+              "value": 1
+            },
+            {
+              "title": "2 Stars",
+              "value": 2
+            },
+            {
+              "title": "3 Stars",
+              "value": 3
+            },
+            {
+              "title": "4 Stars",
+              "value": 4
+            },
+            {
+              "title": "5 Stars",
+              "value": 5
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 5
+              }
+            ],
+            "level": "error",
+            "message": "Rating must be between 1 and 5"
+          }
+        ],
+        "description": "Overall rating for the course",
+        "name": "rating",
+        "type": "number"
+      },
+      {
+        "rows": 6,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 20
+              },
+              {
+                "flag": "max",
+                "constraint": 2000
+              }
+            ],
+            "level": "error",
+            "message": "Review content cannot be longer than 2000 characters"
+          }
+        ],
+        "description": "Detailed review of the course",
+        "name": "reviewContent",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Reviewer reference is required"
+          }
+        ],
+        "description": "The student who wrote this review",
+        "to": [
+          {
+            "type": "student"
+          }
+        ],
+        "name": "reviewer",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Review date is required"
+          }
+        ],
+        "name": "reviewDate",
+        "type": "datetime"
+      }
+    ],
+    "name": "courseReview",
+    "type": "document"
+  },
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "initialValue": "href",
+                  "options": {
+                    "list": [
+                      {
+                        "title": "External URL",
+                        "value": "href"
+                      },
+                      {
+                        "title": "Course",
+                        "value": "course"
+                      },
+                      {
+                        "title": "Chapter",
+                        "value": "chapter"
+                      },
+                      {
+                        "title": "Lesson",
+                        "value": "lesson"
+                      }
+                    ],
+                    "layout": "radio"
+                  },
+                  "name": "linkType",
+                  "type": "string"
+                },
+                {
+                  "validation": [
+                    {
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/"
+                              ],
+                              "allowRelative": false,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        },
+                        {
+                          "flag": "custom"
+                        }
+                      ],
+                      "level": "error"
+                    }
+                  ],
+                  "hidden": "conditional",
+                  "name": "href",
+                  "type": "url",
+                  "title": "URL"
+                },
+                {
+                  "validation": [
+                    {
+                      "rules": [
+                        {
+                          "flag": "custom"
+                        }
+                      ],
+                      "level": "error"
+                    }
+                  ],
+                  "to": [
+                    {
+                      "type": "course"
+                    },
+                    {
+                      "type": "chapter"
+                    },
+                    {
+                      "type": "lesson"
+                    }
+                  ],
+                  "hidden": "conditional",
+                  "name": "reference",
+                  "type": "reference"
+                },
+                {
+                  "initialValue": false,
+                  "name": "openInNewTab",
+                  "type": "boolean",
+                  "title": "Open in new tab"
+                }
+              ],
+              "name": "link",
+              "type": "object"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Emphasis"
+            },
+            {
+              "value": "code",
+              "title": "Code"
+            },
+            {
+              "value": "underline",
+              "title": "Underline"
+            },
+            {
+              "value": "strike-through",
+              "title": "Strike"
+            },
+            {
+              "value": "highlight",
+              "title": "Highlight"
+            }
+          ]
+        },
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bullet"
+          },
+          {
+            "value": "number",
+            "title": "Number"
+          },
+          {
+            "value": "checkbox",
+            "title": "Checklist"
+          }
+        ],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h1",
+            "title": "H1"
+          },
+          {
+            "value": "h2",
+            "title": "H2"
+          },
+          {
+            "value": "h3",
+            "title": "H3"
+          },
+          {
+            "value": "h4",
+            "title": "H4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      },
+      {
+        "fields": [
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "JavaScript",
+                  "value": "javascript"
+                },
+                {
+                  "title": "TypeScript",
+                  "value": "typescript"
+                },
+                {
+                  "title": "HTML",
+                  "value": "html"
+                },
+                {
+                  "title": "CSS",
+                  "value": "css"
+                },
+                {
+                  "title": "JSON",
+                  "value": "json"
+                },
+                {
+                  "title": "Markdown",
+                  "value": "markdown"
+                },
+                {
+                  "title": "Python",
+                  "value": "python"
+                },
+                {
+                  "title": "Bash",
+                  "value": "bash"
+                }
+              ]
+            },
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "valid",
+                    "constraint": [
+                      "javascript",
+                      "typescript",
+                      "html",
+                      "css",
+                      "json",
+                      "markdown",
+                      "python",
+                      "bash"
+                    ]
+                  },
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Please specify the code language"
+              }
+            ],
+            "name": "language",
+            "type": "string"
+          },
+          {
+            "rows": 10,
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Code content is required"
+              }
+            ],
+            "name": "code",
+            "type": "text"
+          },
+          {
+            "description": "Comma separated line numbers to highlight (e.g. 1,3-5,8)",
+            "name": "highlightedLines",
+            "type": "string"
+          }
+        ],
+        "type": "object",
+        "name": "codeBlock"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Alt text is required for accessibility"
+              }
+            ],
+            "description": "Describe the image for screen readers and SEO",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          },
+          {
+            "description": "Optional caption to display below the image",
+            "name": "caption",
+            "type": "string"
+          }
+        ],
+        "type": "image"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  },
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Video URL is required"
+              }
+            ],
+            "description": "Supports YouTube, Vimeo, or direct video URLs",
+            "name": "url",
+            "type": "url",
+            "title": "URL"
+          },
+          {
+            "description": "Optional caption to display below the video",
+            "name": "caption",
+            "type": "string"
+          }
+        ],
+        "type": "object",
+        "name": "video"
+      },
+      {
+        "fields": [
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Info",
+                  "value": "info"
+                },
+                {
+                  "title": "Warning",
+                  "value": "warning"
+                },
+                {
+                  "title": "Success",
+                  "value": "success"
+                },
+                {
+                  "title": "Error",
+                  "value": "error"
+                },
+                {
+                  "title": "Tip",
+                  "value": "tip"
+                }
+              ],
+              "layout": "radio"
+            },
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "valid",
+                    "constraint": [
+                      "info",
+                      "warning",
+                      "success",
+                      "error",
+                      "tip"
+                    ]
+                  },
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Please specify the callout type"
+              }
+            ],
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error",
+                "message": "Callout content is required"
+              }
+            ],
+            "of": [
+              {
+                "marks": {
+                  "annotations": [
+                    {
+                      "i18nTitleKey": "inputs.portable-text.annotation.link",
+                      "options": {
+                        "modal": {
+                          "type": "popover"
+                        }
+                      },
+                      "fields": [
+                        {
+                          "validation": [
+                            {
+                              "rules": [
+                                {
+                                  "flag": "uri",
+                                  "constraint": {
+                                    "options": {
+                                      "scheme": [
+                                        "/^http$/",
+                                        "/^https$/",
+                                        "/^tel$/",
+                                        "/^mailto$/"
+                                      ],
+                                      "allowRelative": true,
+                                      "relativeOnly": false,
+                                      "allowCredentials": false
+                                    }
+                                  }
+                                }
+                              ],
+                              "level": "error"
+                            }
+                          ],
+                          "description": "A valid web, email, phone, or relative link.",
+                          "name": "href",
+                          "type": "url",
+                          "title": "Link"
+                        }
+                      ],
+                      "name": "link",
+                      "type": "object"
+                    }
+                  ],
+                  "decorators": [
+                    {
+                      "value": "strong",
+                      "title": "Strong"
+                    },
+                    {
+                      "value": "em",
+                      "title": "Italic"
+                    },
+                    {
+                      "value": "code",
+                      "title": "Code"
+                    },
+                    {
+                      "value": "underline",
+                      "title": "Underline"
+                    },
+                    {
+                      "value": "strike-through",
+                      "title": "Strike"
+                    }
+                  ]
+                },
+                "lists": [
+                  {
+                    "value": "bullet",
+                    "title": "Bulleted list"
+                  },
+                  {
+                    "value": "number",
+                    "title": "Numbered list"
+                  }
+                ],
+                "styles": [
+                  {
+                    "value": "normal",
+                    "title": "Normal"
+                  },
+                  {
+                    "value": "h1",
+                    "title": "Heading 1"
+                  },
+                  {
+                    "value": "h2",
+                    "title": "Heading 2"
+                  },
+                  {
+                    "value": "h3",
+                    "title": "Heading 3"
+                  },
+                  {
+                    "value": "h4",
+                    "title": "Heading 4"
+                  },
+                  {
+                    "value": "h5",
+                    "title": "Heading 5"
+                  },
+                  {
+                    "value": "h6",
+                    "title": "Heading 6"
+                  },
+                  {
+                    "value": "blockquote",
+                    "title": "Quote"
+                  }
+                ],
+                "of": [],
+                "type": "block"
+              }
+            ],
+            "name": "content",
+            "type": "array"
+          }
+        ],
+        "type": "object",
+        "name": "callout"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array"
+  }
+]
