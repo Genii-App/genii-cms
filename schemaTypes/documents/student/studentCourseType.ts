@@ -212,13 +212,5 @@ export const studentCourseType = defineType({
         (document as StudentCourseDocument)?.status !== 'completed' ||
         (document as StudentCourseDocument)?.certificateIssued !== 'issued',
     }),
-    defineField({
-      name: 'notes',
-      title: 'Progress Notes',
-      type: 'array',
-      group: 'progress',
-      of: [{type: 'reference', to: [{type: 'studentNote'}]}],
-      description: "Notes related to student's course progress",
-    }),
   ],
 })
