@@ -8,7 +8,6 @@ interface CourseReference {
 interface StudentCourseDocument {
   course?: CourseReference
   status?: string
-  certificateIssued?: string
   enrolledAt?: string
 }
 
@@ -184,33 +183,6 @@ export const studentCourseType = defineType({
           return true
         }),
       hidden: ({document}) => (document as StudentCourseDocument)?.status !== 'completed',
-    }),
-    defineField({
-      name: 'certificateIssued',
-      title: 'Certificate Status',
-      type: 'string',
-      group: 'completion',
-      options: {
-        list: [
-          {title: 'Not Eligible', value: 'not_eligible'},
-          {title: 'Eligible - Not Issued', value: 'eligible'},
-          {title: 'Issued', value: 'issued'},
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'not_eligible',
-      validation: (rule) => rule.required().error('Certificate status is required'),
-      hidden: ({document}) => (document as StudentCourseDocument)?.status !== 'completed',
-    }),
-    defineField({
-      name: 'certificate',
-      title: 'Course Certificate',
-      type: 'reference',
-      to: [{type: 'studentCertificate'}],
-      group: 'completion',
-      hidden: ({document}) =>
-        (document as StudentCourseDocument)?.status !== 'completed' ||
-        (document as StudentCourseDocument)?.certificateIssued !== 'issued',
     }),
   ],
 })
